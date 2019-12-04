@@ -140,20 +140,32 @@ function createArticle(obj) {
   const articleP2 = document.createElement("p");
   const articleP3 = document.createElement("p");
   const articleButton = document.createElement("span");
+  const articleDel = document.createElement("span");
 
   article.classList.add("article");
   articleDate.classList.add("date");
   articleButton.classList.add("expandButton");
+  articleDel.classList.add("delete");
 
   articleTitle.textContent = obj.title;
   articleDate.textContent = obj.date;
   articleP1.textContent = obj.firstParagraph;
   articleP2.textContent = obj.secondParagraph;
   articleP3.textContent = obj.thirdParagraph;
-  articleButton.textContent = "OPEN ARTICLE";
+  articleButton.textContent = "OPEN";
+  articleDel.textContent = "X";
 
   articleButton.addEventListener("click", event => {
     article.classList.toggle("article-open");
+    if (article.classList.contains("article-open")) {
+      articleButton.textContent = "CLOSE ";
+    } else {
+      articleButton.textContent = "OPEN";
+    }
+  });
+
+  articleDel.addEventListener("click", event => {
+    article.style.display = "none";
   });
 
   article.append(
@@ -162,7 +174,8 @@ function createArticle(obj) {
     articleP1,
     articleP2,
     articleP3,
-    articleButton
+    articleButton,
+    articleDel
   );
 
   return article;
